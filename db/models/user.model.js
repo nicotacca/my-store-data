@@ -20,6 +20,11 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'customer'
+  },
 
   // hablando de convenciones, camel case para JS pero en field respetamos el naming para bases de datos
   //seq now para el momento de insercion
