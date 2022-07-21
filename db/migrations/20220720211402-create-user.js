@@ -12,7 +12,7 @@ module.exports = {
   },
 
   // si quiero revertir el cambio
-  
+
   async down (queryInterface) {
     await queryInterface.drop(USER_TABLE)
   }
