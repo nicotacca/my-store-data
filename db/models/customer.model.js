@@ -4,7 +4,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { USER_TABLE } = require('./user.model')
 
-const CUSTOMER_TABLE='customers';
+const CUSTOMER_TABLE = 'customers';
 
 const CustomerSchema = {
   id: {
@@ -27,22 +27,22 @@ const CustomerSchema = {
     type:DataTypes.STRING,
   },
   createdAt: {
-    allowNull:false,type:DataTypes.DATE,field:'created_at',defaultValue:Sequelize.NOW,},userId:{field:'user_id',allowNull:false,
+    allowNull:false,type:DataTypes.DATE,
+    field:'created_at',
+    defaultValue:Sequelize.NOW,
+  },
+  userId: {
+    field:'user_id',
+    allowNull:false,
     type:DataTypes.INTEGER,
     unique:true,
-    references:{model:USER_TABLE,key:'id'},
+    references: {
+      model:USER_TABLE,
+      key:'id'
+    },
     onUpdate:'CASCADE',
     onDelete:'SET NULL'
   },
-  userId: {
-    field: 'user_id',
-    allowNull:false,
-    type: DataTypes.INTEGER,
-    references: {
-      model: ''
-    }
-  }
-
 }
 
 
@@ -62,4 +62,4 @@ class Customer extends Model {
     }
   }
 }
-module.exports={Customer,CustomerSchema,CUSTOMER_TABLE};
+module.exports = { Customer, CustomerSchema, CUSTOMER_TABLE };
