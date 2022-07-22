@@ -16,6 +16,7 @@ function setupModels(sequelize) {
 
   // ejecutamos el metodo y le pasamos los modelos que estan en seq
   Customer.associate(sequelize.models);
+  User.associate(sequelize.models);
 }
 
 // exporto la funcion para usarla en seqelize.js

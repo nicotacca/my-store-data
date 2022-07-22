@@ -41,8 +41,13 @@ const UserSchema = {
 // procedemos a crear metodos staticos (no necesaria la instancia) q nos va a ayudar a definir las asociaciones (relaciones)
 
 class User extends Model {
-  static associate() {
-    // associate
+  static associate(models) {
+    // es hasOne porque la rel esta del lado de customer
+    this.hasOne(models.Customer, {
+      as: 'customer',
+      // aca le digo que desde la tabla customer hay una ref q es el user id
+      foreignKey: 'userId'
+    })
   }
 
   //
