@@ -2,9 +2,11 @@ const faker = require('faker');
 const boom = require('@hapi/boom');
 
 // me traigo pool a mi servicio para utilizarlo
-const pool = require('../libs/postgres.pool');
+// const pool = require('../libs/postgres.pool');
 
 const sequelize = require('../libs/sequelize')
+
+const { models } = require('../libs/sequelize');
 
 class ProductsService {
 
@@ -42,13 +44,18 @@ class ProductsService {
   }
 
   async create(data) {
+    const newProduct = models.Product.create(data)
+    return newProduct;
+  }
+
+/*   async create(data) {
     const newProduct = {
       id: faker.datatype.uuid(),
       ...data
     }
     this.products.push(newProduct);
     return newProduct;
-  }
+  } */
 
   // en vez de retornar el fake retornamos la consulta; RECORDAR que esto es de forma asincrona porque debemos esperar la respuesta del pool
 
@@ -65,7 +72,7 @@ class ProductsService {
     return rta.rows;
   } */
 
-  async find() {
+/*   async find() {
 
     const query = 'SELECT * FROM tasks';
 
@@ -76,6 +83,19 @@ class ProductsService {
       data,
       // metadata
     };
+  } */
+
+  async find(query) {
+    const options = {
+      include: ['category'],
+    }
+    const { limit, offset } = query;
+    if (limit && offset) {
+      options.limit =  limit;
+      options.offset =  offset;
+    }
+    const products = await models.Product.findAll(options);
+    return products;
   }
 
 /*
